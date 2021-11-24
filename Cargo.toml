@@ -1,8 +1,12 @@
 [package]
 name = "reify"
 version = "0.1.0"
+authors = ["Davide Ghilardi <dghila@d71.dev>"]
+description = "Write configuration files from templates using env variables"
+keywords = [ "configuration", "generation", "env", "environment" ]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "MIT"
+repository = "https://github.com/dghilardi/reify"
+readme = "README.md"
 
 [dependencies]
