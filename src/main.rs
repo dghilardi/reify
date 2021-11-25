@@ -3,9 +3,14 @@ use config::{Config, ConfigError, File};
 
 use crate::cli::ReifyOpts;
 use common::config::ReifyConfig;
+use crate::common::config::ReifyProcessor;
+use crate::common::config::ReifyProcessor::Handlebars;
+use crate::processor::handlebars::HandlebarsProcessor;
 
 mod cli;
 mod common;
+mod engine;
+mod processor;
 
 fn parse_config(cfg_path: &str) -> Result<ReifyConfig, ConfigError> {
     let mut cfg = Config::new();
@@ -17,5 +22,10 @@ fn main() {
     let opts = ReifyOpts::parse();
     let config = parse_config(&opts.config_file)
         .expect("Error parsing configuration file");
-    println!("opts: {:?}", config);
+
+    for mount in config.mounts {
+        match mount.processor {
+            Handlebars => engine::process_template(&mount.source, &mount.destination, HandlebarsProcessor::new())
+        }.expect("Error processing template")
+    }
 }
