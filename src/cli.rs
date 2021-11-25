@@ -8,6 +8,9 @@ pub struct ReifyOpts {
     #[clap(short, long)]
     pub config_file: String,
 
+    #[clap(short, long, default_value = "reify")]
+    pub env_prefix: String,
+
     /// Templates
     #[clap(short, long, multiple_occurrences = true)]
     pub templates: Vec<String>,

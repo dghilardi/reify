@@ -25,7 +25,7 @@ fn main() {
 
     for mount in config.mounts {
         match mount.processor {
-            Handlebars => engine::process_template(&mount.source, &mount.destination, HandlebarsProcessor::new())
+            Handlebars => engine::process_template(&mount.source, &mount.destination, HandlebarsProcessor::new(&opts.env_prefix).expect("Error building processor"))
         }.expect("Error processing template")
     }
 }
