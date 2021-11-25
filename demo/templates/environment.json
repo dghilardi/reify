@@ -1,0 +1,7 @@
+{
+  "host": "{{hostname}}",
+  "features": {
+    "showBetaBadge": "{{showBetaBadge}}",
+    "onlyBetaUsers": "{{onlyBetaUsers}}"
+  }
+}

@@ -1,0 +1,4 @@
+[[mounts]]
+source = "templates/environment.json"
+destination = "out/environment.json"
+processor = "handlebars"
