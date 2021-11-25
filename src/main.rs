@@ -3,7 +3,6 @@ use config::{Config, ConfigError, File};
 
 use crate::cli::ReifyOpts;
 use common::config::ReifyConfig;
-use crate::common::config::ReifyProcessor;
 use crate::common::config::ReifyProcessor::Handlebars;
 use crate::processor::handlebars::HandlebarsProcessor;
 

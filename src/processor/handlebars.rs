@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::env;
 use handlebars::{Handlebars};
 use crate::processor::ReifyProcessor;
 
@@ -11,7 +10,7 @@ pub struct HandlebarsProcessor<'a> {
 impl <'a> HandlebarsProcessor<'a> {
     pub fn new(prefix: &str) -> anyhow::Result<Self> {
         Ok(Self {
-            env: if prefix.chars().last() == Some('_') {
+            env: if prefix.ends_with('_') {
                 envy::prefixed(prefix).from_env()?
             } else {
                 envy::prefixed(format!("{}_", prefix)).from_env()?
