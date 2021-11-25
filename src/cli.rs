@@ -6,9 +6,9 @@ use clap::Parser;
 pub struct ReifyOpts {
     /// Configuration file
     #[clap(short, long)]
-    config_file: Option<String>,
+    pub config_file: String,
 
     /// Templates
     #[clap(short, long, multiple_occurrences = true)]
-    templates: Vec<String>,
+    pub templates: Vec<String>,
 }
