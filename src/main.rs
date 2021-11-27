@@ -3,8 +3,9 @@ use config::{Config, ConfigError, File};
 
 use crate::cli::ReifyOpts;
 use common::config::ReifyConfig;
-use crate::common::config::ReifyProcessor::Handlebars;
+use crate::common::config::ReifyProcessor;
 use crate::processor::context::EnvContext;
+use crate::processor::copy::CopyProcessor;
 use crate::processor::handlebars::HandlebarsProcessor;
 
 mod cli;
@@ -28,7 +29,8 @@ fn main() {
 
     for mount in config.mounts {
         match mount.processor {
-            Handlebars => engine::process_template(&mount.source, &mount.destination, HandlebarsProcessor::new(&context).expect("Error building processor"))
+            ReifyProcessor::Handlebars => engine::process_template(&mount.source, &mount.destination, HandlebarsProcessor::new(&context).expect("Error building processor")),
+            ReifyProcessor::Copy => engine::process_template(&mount.source, &mount.destination, CopyProcessor),
         }.expect("Error processing template")
     }
 }

@@ -7,3 +7,8 @@ dev_onlyBetaUsers = "true"
 source = "templates/environment.json"
 destination = "out/environment.json"
 processor = "handlebars"
+
+[[mounts]]
+source = "templates/environment.json"
+destination = "out/environment.orig.json"
+processor = "copy"
