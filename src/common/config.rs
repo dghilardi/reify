@@ -1,8 +1,10 @@
+use std::collections::HashMap;
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct ReifyConfig {
-    pub mounts: Vec<ReifyMount>
+    pub env: HashMap<String, String>,
+    pub mounts: Vec<ReifyMount>,
 }
 
 #[derive(Deserialize, Debug)]
