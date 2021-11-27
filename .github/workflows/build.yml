@@ -39,3 +39,14 @@ jobs:
         mkdir builds/reify-linux
         cp target/x86_64-unknown-linux-gnu/release/reify builds/reify-linux
         tar -C builds -czvf dist/reify-linux.tar.gz reify-linux
+    - name: Upload release
+      uses: softprops/action-gh-release@v1
+      permissions:
+        contents: write
+      with:
+        # body_path: CHANGELOG.md # TBD
+        files: |
+          dist/reify-win64.tar.gz
+          dist/reify-linux.tar.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
