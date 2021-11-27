@@ -33,41 +33,9 @@ jobs:
         mkdir builds/reify-win64
         cp target/x86_64-pc-windows-gnu/release/reify.exe builds/reify-win64
         tar -C builds -czvf dist/reify-win64.tar.gz reify-win64
-#    - name: Build Win32
-#      run: |
-#        cargo rustc --release --target=i686-pc-windows-gnu -- -C linker=i686-w64-mingw32-gcc -C link-args=-mwindows -C panic=abort
-#        mkdir builds/reify-win32
-#        cp target/i686-pc-windows-gnu/release/reify.exe builds/reify-win32
-#        tar -C builds -czvf dist/reify-win32.tar.gz reify-win32
     - name: Build Linux
       run: |
         cargo rustc --release --target=x86_64-unknown-linux-gnu
         mkdir builds/reify-linux
         cp target/x86_64-unknown-linux-gnu/release/reify builds/reify-linux
         tar -C builds -czvf dist/reify-linux.tar.gz reify-linux
-    - name: Cache Mac OS dependencies
-      id: cache-macos
-      uses: actions/cache@v1
-      with:
-        path: osxcross
-        key: ${{ runner.os }}-osxcross
-
-    - name: Install Mac OS dependencies
-      if: steps.cache-macos.outputs.cache-hit != 'true'
-      run: |
-        git clone https://github.com/tpoechtrager/osxcross
-        cd osxcross
-        sudo tools/get_dependencies.sh
-        wget -nc https://s3.dockerproject.org/darwin/v2/MacOSX10.10.sdk.tar.xz
-        mv MacOSX10.10.sdk.tar.xz tarballs/
-        UNATTENDED=yes OSX_VERSION_MIN=10.7 ./build.sh
-    - name: Build Mac OS
-      run: |
-        export PATH="$(pwd)/osxcross/target/bin:$PATH"
-        export LIBZ_SYS_STATIC=1
-        export CC=o64-clang
-        export CXX=o64-clang++
-        cargo build --release --target "x86_64-apple-darwin"
-        mkdir builds/reify-macos
-        cp target/x86_64-apple-darwin/release/reify builds/reify-macos
-        tar -C builds -czvf dist/reify-macos.tar.gz reify-macos
