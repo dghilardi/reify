@@ -1,4 +1,8 @@
 use clap::Parser;
+use config::{Config, ConfigError, File};
+use wasm_bindgen::prelude::*;
+
+use common::config::ReifyConfig;
 
 use crate::cli::ReifyOpts;
 use crate::common::config::{parse_config, ReifyProcessor};
@@ -11,7 +15,8 @@ mod common;
 mod engine;
 mod processor;
 
-fn main() {
+#[wasm_bindgen]
+pub fn run() {
     let opts = ReifyOpts::parse();
     let config = parse_config(&opts.config_file)
         .expect("Error parsing configuration file");
