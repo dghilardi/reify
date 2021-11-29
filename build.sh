@@ -1,6 +1,6 @@
 #!/bin/bash -e
 WASMBINDGEN_VERSION=0.2.76
-OUT=./pkg
+OUT=./nodejs/pkg
 
 echo "Running cargo build"
 cargo build --release --target wasm32-unknown-unknown
