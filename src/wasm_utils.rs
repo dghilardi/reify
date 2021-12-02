@@ -28,3 +28,32 @@ extern "C" {
     #[wasm_bindgen(js_namespace = console, js_name = log)]
     fn log_many(a: &str, b: &str);
 }
+
+#[wasm_bindgen(module = "fs")]
+extern "C" {
+    #[wasm_bindgen(js_name = readFileSync, catch)]
+    pub fn read_file(path: &str, encoding: &str) -> Result<String, JsValue>;
+
+    #[wasm_bindgen(js_name = writeFileSync, catch)]
+    pub fn write_file(path: &str, content: &str) -> Result<(), JsValue>;
+}
+
+pub mod process {
+
+    use wasm_bindgen::prelude::*;
+
+    #[wasm_bindgen(module = process)]
+    extern "C" {
+
+        #[wasm_bindgen(js_name = arch)]
+        pub static ARCH: String;
+
+        #[wasm_bindgen(js_name = env)]
+        pub static ENV: JsValue;
+
+        pub fn hrtime() -> js_sys::Array;
+
+        #[wasm_bindgen(js_name = platform)]
+        pub static PLATFORM: String;
+    }
+}
