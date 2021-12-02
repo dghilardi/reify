@@ -1,5 +1,6 @@
 /target
 /builds
 /dist
-
+/pkg
+/nodejs/pkg
 .idea

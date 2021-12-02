@@ -1,23 +1,21 @@
 use std::collections::HashMap;
-
-pub trait ReifyContext {
-    fn read_ctx(&self) -> &HashMap<String, String>;
-}
+use crate::processor::context::ReifyContext;
+use crate::system::EnvVars;
 
 pub struct EnvContext {
     context: HashMap<String, String>,
 }
 
 impl EnvContext {
-    pub fn new(prefix: &str) -> anyhow::Result<Self> {
+    pub fn new<E: EnvVars>(prefix: &str) -> anyhow::Result<Self> {
         Ok(Self {
-            context: envy::prefixed(format_prefix(prefix)).from_env()?,
+            context: E::prefixed(&format_prefix(prefix))?,
         })
     }
 
-    pub fn merge_default(defaults: HashMap<String, String>, prefix: &str) -> anyhow::Result<Self> {
+    pub fn merge_default<E: EnvVars>(defaults: HashMap<String, String>, prefix: &str) -> anyhow::Result<Self> {
         let fmt_prefix = format_prefix(prefix);
-        let mut ctx = Self::new(&fmt_prefix)?;
+        let mut ctx = Self::new::<E>(&fmt_prefix)?;
         defaults.into_iter()
             .filter_map(|(k, v)|
                 if k.starts_with(&fmt_prefix) {
