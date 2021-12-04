@@ -1,5 +1,9 @@
 # Reify
 
+[![Test Status](https://github.com/dghilardi/reify/workflows/Tests/badge.svg?event=push)](https://github.com/dghilardi/reify/actions)
+[![Crate](https://img.shields.io/crates/v/reify.svg)](https://crates.io/crates/reify)
+[![API](https://docs.rs/reify/badge.svg)](https://docs.rs/reify)
+
 ## Quick start
 
 Install using cargo:
