@@ -39,7 +39,7 @@ Add custom script in your package.json
 
 ```json
 {
-  "script": {
+  "scripts": {
     "reify": "env-reify -c reify.toml -e dev"
   }
 }
