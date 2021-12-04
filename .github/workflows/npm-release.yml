@@ -3,7 +3,6 @@ name: npm-release
 on:
   push:
     tags: ['v*.*.*']
-    branches: ['**']
 
 jobs:
   wasm-rel:
