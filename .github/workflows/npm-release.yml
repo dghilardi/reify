@@ -1,0 +1,26 @@
+name: npm-release
+
+on:
+  push:
+    tags: ['v*.*.*']
+    branches: ['**']
+
+jobs:
+  wasm-rel:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Run tests
+      run: cargo test --verbose
+
+    - name: Install dependencies
+      run: |
+        rustup target add wasm32-unknown-unknown
+        mkdir dist
+        mkdir builds
+    - name: Build WASM32
+      run: ./build.sh
