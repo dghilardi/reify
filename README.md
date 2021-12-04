@@ -8,7 +8,7 @@ Install using cargo:
 cargo install reify
 ```
 
-Write a template (currently only handlebars is supported):
+Write a template:
 
 ```json
 {
@@ -34,3 +34,9 @@ Invoke the command to generate filled files:
 ```shell
 dev_hostname=dev.com reify -c reify.toml -e dev
 ```
+
+## Supported Templates
+
+ * `copy` simply copy source file to destination path
+ * `handlebars` rust [implementation](https://github.com/sunng87/handlebars-rust) of handlebars templating language
+ * `tera` [tera](https://tera.netlify.app) templating engine
