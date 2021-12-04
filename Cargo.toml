@@ -28,7 +28,7 @@ getrandom = { version = "*", features = ["js"] }
 
 # WASM
 js-sys = "0.3.55"
-wasm-bindgen = { version = "0.2.63", features = ["serde-serialize"] }
+wasm-bindgen = { version = "0.2.78", features = ["serde-serialize"] }
 console_error_panic_hook = { version = "0.1.6", optional = true }
 
 [dev-dependencies]
