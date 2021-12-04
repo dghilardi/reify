@@ -24,3 +24,11 @@ jobs:
         mkdir builds
     - name: Build WASM32
       run: ./build.sh
+    - name: Yarn build
+      working-directory: ./nodejs
+      run: yarn --frozen-lockfile
+    - name: Yarn release
+      working-directory: ./nodejs
+      run: yarn publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
