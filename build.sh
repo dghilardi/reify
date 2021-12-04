@@ -12,7 +12,7 @@ fi
 
 if ! [ -x "$(command -v wasm-bindgen)" ]; then
   echo "Installing wasm-bindgen-cli via cargo"
-  cargo install wasm-bindgen-cli --version 0.2.76
+  cargo install wasm-bindgen-cli --version 0.2.78
 fi
 
 echo "Generating wasm-bindings"
