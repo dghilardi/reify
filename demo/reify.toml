@@ -10,5 +10,10 @@ processor = "handlebars"
 
 [[mounts]]
 source = "templates/environment.json"
+destination = "out/environment.tera.json"
+processor = "tera"
+
+[[mounts]]
+source = "templates/environment.json"
 destination = "out/environment.orig.json"
 processor = "copy"

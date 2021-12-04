@@ -7,6 +7,7 @@ use clap::Parser;
 use crate::conf::loader::ConfigLoader;
 use crate::conf::model::ReifyProcessor;
 use crate::processor::context::EnvContext;
+use crate::processor::tera::TeraProcessor;
 use crate::system::{EnvVars, FileSystem};
 
 pub fn process_template<P: crate::processor::ReifyProcessor, S: FileSystem>(src_path: &str, dst_path: &str, processor: P) -> anyhow::Result<()> {
@@ -33,6 +34,7 @@ pub fn run<I, T, S>(args: I) -> anyhow::Result<()>
     for mount in config.mounts {
         match mount.processor {
             ReifyProcessor::Handlebars => process_template::<_, S>(&mount.source, &mount.destination, HandlebarsProcessor::new(&context).context("Error building processor")?),
+            ReifyProcessor::Tera => process_template::<_, S>(&mount.source, &mount.destination, TeraProcessor::new(&context)),
             ReifyProcessor::Copy => process_template::<_, S>(&mount.source, &mount.destination, CopyProcessor),
         }.context("Error processing template")?
     }

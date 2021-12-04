@@ -18,6 +18,8 @@ pub struct ReifyMount {
 pub enum ReifyProcessor {
     #[serde(rename = "handlebars")]
     Handlebars,
+    #[serde(rename = "tera")]
+    Tera,
     #[serde(rename = "copy")]
     Copy,
 }
