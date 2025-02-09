@@ -12,6 +12,6 @@ pub struct ReifyOpts {
     pub env_prefix: String,
 
     /// Templates
-    #[clap(short, long, multiple_occurrences = true)]
+    #[clap(short, long)]
     pub templates: Vec<String>,
 }
